@@ -44,7 +44,13 @@ shuffle(outOfOptions);
 // display values
 
 var el = document.getElementById('answer');
-el.textContent = answer;
+var displayAnswer;
+if (Math.floor(answer) == answer) {
+ displayAnswer = answer
+} else {
+  displayAnswer = answer.toFixed(1);
+}
+el.textContent = displayAnswer;
 
 for (i = 0; i < 4; i++)
 {
