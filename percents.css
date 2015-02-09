@@ -1,0 +1,56 @@
+body {
+  color: #5E412F;
+}
+
+#answer {
+  text-align:center;
+  font-size:4em;
+  width:500px;
+  background-color:#78C0A8;
+  border-style:solid;
+  border-color:#5E412F;
+  border-width:3px;
+}
+
+.preposition {
+  text-align:center;
+  font-size:1.5em;
+  width:500px;
+  background-color:#FCEBB6;
+  border-style:solid;
+  border-color:#5E412F;
+  border-width:0px 3px;
+}
+
+#percents, #out-of {
+  width:500px;
+  font-size:2.5em;
+  background-color:#78C0A8;
+  border-style:solid;
+  border-color:#5E412F;
+  border-width:3px;
+  overflow:hidden;
+}
+
+.answer {
+  width:125px;
+  float:left;
+}
+
+#check {
+  width:460px;
+  text-align:center;
+  background-color:#F0A830;
+  border-width:0 3px 3px;
+  border-color:#5E412F;
+  border-style:solid;
+  padding:20px;
+}
+
+#check a {
+  text-decoration: none;
+  background:#F07818;
+  font-size:2em;
+  padding:5px 10px;
+  border: 1px solid #5E412F;
+}
