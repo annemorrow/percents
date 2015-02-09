@@ -46,26 +46,11 @@ shuffle(outOfOptions);
 var el = document.getElementById('answer');
 el.textContent = answer;
 
-var el = document.getElementById('p0');
-el.firstChild.nextSibling.textContent = percentsOptions[0] + "%";
-
-var el = document.getElementById('p1');
-el.firstChild.nextSibling.textContent = percentsOptions[1] + "%";
-
-var el = document.getElementById('p2');
-el.firstChild.nextSibling.textContent = percentsOptions[2] + "%";
-
-var el = document.getElementById('p3');
-el.firstChild.nextSibling.textContent = percentsOptions[3] + "%";
-
-var el = document.getElementById('o0');
-el.firstChild.nextSibling.textContent = outOfOptions[0];
-
-var el = document.getElementById('o1');
-el.firstChild.nextSibling.textContent = outOfOptions[1];
-
-var el = document.getElementById('o2');
-el.firstChild.nextSibling.textContent = outOfOptions[2];
-
-var el = document.getElementById('o3');
-el.firstChild.nextSibling.textContent = outOfOptions[3];
+for (i = 0; i < 4; i++)
+{
+  var el = document.getElementById('p' + i);
+  el.firstChild.nextSibling.textContent = percentsOptions[i] + "%";
+  
+  var el = document.getElementById('o' + i);
+  el.firstChild.nextSibling.textContent = outOfOptions[i];
+}
