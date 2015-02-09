@@ -54,3 +54,18 @@ for (i = 0; i < 4; i++)
   var el = document.getElementById('o' + i);
   el.firstChild.nextSibling.textContent = outOfOptions[i];
 }
+
+
+var percentsChoice, outOfChoice;
+$(document).ready(function() {
+  $('#checkbtn').click(function(evt){
+    evt.preventDefault();
+    percentsChoice = percentsOptions[$('input[name="percent"]:checked').val()];
+    outOfChoice = outOfOptions[$('input[name="outof"]:checked').val()];
+    if (percentsChoice / 100 * outOfChoice == answer) {
+      document.getElementById('success').textContent = "Correct!"
+    } else {
+      document.getElementById('success').textContent = "Try again!"
+    }
+  });
+});
