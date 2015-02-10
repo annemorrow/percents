@@ -58,3 +58,7 @@ body {
 #success {
   font-size:3em;
 }
+
+#hint {
+  width:500px;
+}
