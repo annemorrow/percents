@@ -73,6 +73,7 @@ function next() {
   document.getElementById('hint').textContent = "";
   $('input[name=percent]').attr('checked',false);
   $('input[name=outof]').attr('checked',false);
+  $('#next').addClass("inactive");
 }
 
 next();
@@ -84,6 +85,7 @@ $(document).ready(function() {
     outOf.choice = outOf.options[$('input[name="outof"]:checked').val()];
     if (percents.choice / 100 * outOf.choice == answer) {
       document.getElementById('success').textContent = "Correct!";
+      $('#next').removeClass("inactive");
     } else {
       document.getElementById('success').textContent = "Try again!";
       if (outOf.answer == 100) {
@@ -95,7 +97,9 @@ $(document).ready(function() {
   });
   
   $('#next').click(function(evt) {
-    evt.preventDefault();
-    next();
+    if (!$('#next').hasClass("inactive")) {
+      evt.preventDefault();
+      next();
+    }
   });
 });

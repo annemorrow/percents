@@ -55,6 +55,10 @@ body {
   border: 1px solid #5E412F;
 }
 
+#check .inactive {
+  background:#C26114;
+}
+
 #success {
   font-size:3em;
 }
