@@ -1,77 +1,81 @@
+var percents = {
+  wholeList: [100, 50, 10, 20, 25, 200, 150],
+  options: []
+}
+
+var outOf = {
+  wholeList: [12, 24, 100, 60, 200, 40, 120],
+  options: []
+}
+
+var answer;
+
+function chooseAnswers() {
+  outOf.answer = outOf.wholeList[Math.floor(Math.random()*outOf.wholeList.length)];
+  percents.answer = percents.wholeList[Math.floor(Math.random()*percents.wholeList.length)];
+  answer = percents.answer / 100 * outOf.answer;
+};
+
 function shuffle(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 };
 
-// following two arrays are the 'dictionaries' to create problems
-
-var outOf = [12, 24, 100, 60, 200, 40, 120];
-
-var percents = [100, 50, 10, 20, 25, 200, 150];
-
-//  choose the answers for the problem
-
-var outOfAnswer = outOf[Math.floor(Math.random()*outOf.length)];
-
-var percentsAnswer = percents[Math.floor(Math.random()*percents.length)];
-
-var answer = percentsAnswer / 100 * outOfAnswer;
-
-// make an array of options for the percents answer
-
-var percentsOptions = percents.filter(function(p) { return p != percentsAnswer });
-
-shuffle(percentsOptions);
-
-percentsOptions = percentsOptions.slice(0, 3);
-
-percentsOptions.push(percentsAnswer);
-
-shuffle(percentsOptions);
-
-// make an array of options for the out-of answer
-
-var outOfOptions = outOf.filter(function(o) { return o != outOfAnswer });
-
-shuffle(outOfOptions);
-
-outOfOptions = outOfOptions.slice(0, 3);
-
-outOfOptions.push(outOfAnswer);
-
-shuffle(outOfOptions);
-
-// display values
-
-var el = document.getElementById('answer');
-var displayAnswer;
-if (Math.floor(answer) == answer) {
- displayAnswer = answer
-} else {
-  displayAnswer = answer.toFixed(1);
+function makeOptions(obj) {
+  obj.options = obj.wholeList.filter(function(x) {return x != obj.answer });
+  shuffle(obj.options);
+  obj.options = obj.options.slice(0, 3);
+  obj.options.push(obj.answer);
+  shuffle(obj.options);
 }
-el.textContent = displayAnswer;
 
-for (i = 0; i < 4; i++)
-{
-  var el = document.getElementById('p' + i);
-  el.firstChild.nextSibling.textContent = percentsOptions[i] + "%";
+
+function displayProblem() {
+  var el = document.getElementById('answer');
+  var displayAnswer;
+  if (Math.floor(answer) == answer) {
+   displayAnswer = answer
+  } else {
+    displayAnswer = answer.toFixed(1);
+  }
+  el.textContent = displayAnswer;
+  for (i = 0; i < 4; i++)
+  {
+    var el = document.getElementById('p' + i);
+    el.firstChild.nextSibling.textContent = percents.options[i] + "%";
   
-  var el = document.getElementById('o' + i);
-  el.firstChild.nextSibling.textContent = outOfOptions[i];
+    var el = document.getElementById('o' + i);
+    el.firstChild.nextSibling.textContent = outOf.options[i];
+  }
 }
 
+function next() {
+  chooseAnswers();
+  displayProblem();
+  makeOptions(percents);
+  makeOptions(outOf);
+  displayProblem();
+  document.getElementById('success').textContent = "";
+  $('input[name=percent]').attr('checked',false);
+  $('input[name=outof]').attr('checked',false);
+}
 
-var percentsChoice, outOfChoice;
+next();
+
 $(document).ready(function() {
   $('#checkbtn').click(function(evt){
     evt.preventDefault();
-    percentsChoice = percentsOptions[$('input[name="percent"]:checked').val()];
-    outOfChoice = outOfOptions[$('input[name="outof"]:checked').val()];
-    if (percentsChoice / 100 * outOfChoice == answer) {
-      document.getElementById('success').textContent = "Correct!"
+    percents.choice = percents.options[$('input[name="percent"]:checked').val()];
+    outOf.choice = outOf.options[$('input[name="outof"]:checked').val()];
+    if (percents.choice / 100 * outOf.choice == answer) {
+      document.getElementById('success').textContent = "Correct!";
     } else {
-      document.getElementById('success').textContent = "Try again!"
+      document.getElementById('success').textContent = "Try again!";
     }
+  });
+  
+  $('#next').click(function(evt) {
+    evt.preventDefault();
+    next();
   });
 });
